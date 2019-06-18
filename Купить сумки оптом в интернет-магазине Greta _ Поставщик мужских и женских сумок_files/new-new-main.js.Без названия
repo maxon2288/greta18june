@@ -1,0 +1,8 @@
+$(document).ready(function() {
+    console.log(1000101000100000100101001111101010001010010000101010010101000010001110010100010);
+    $(".n-m-img-cont").each(function() {
+        var it = $(this);
+        var img = it.find("img").attr("src");
+        it.css("background-image", "url(" + img + ")");
+    });
+});

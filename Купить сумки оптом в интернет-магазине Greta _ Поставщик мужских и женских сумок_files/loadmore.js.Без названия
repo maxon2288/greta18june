@@ -1,0 +1,84 @@
+$(document).ready(function() {
+
+	// При нажатии на загрузить еще	
+	$(document).on('click', '.loadmore a', function (event) {
+		event.preventDefault();
+		loadmore();
+	});
+
+	// Если доскролили до этого элемента
+	$(window).scroll(function(){
+		if ($('.loadmore').length) {
+			var bottomOffset = $('.loadmore').offset().top;
+			console.log(window.innerHeight);
+			if ($(document).scrollTop() >= bottomOffset-window.innerHeight/2) {
+				loadmore();
+			}
+		}
+	});
+
+	// Функция загрузки товаров
+	function loadmore() {
+		var ajaxurl = $('.loadmore a').data('url');
+		var data = {};
+		var state = {};
+		var url = $('.loadmore a').attr('href');
+
+		$('.preloader').show();
+		$('.loadmore').remove();
+		$('.paginator').remove();
+
+		$.ajax({
+			url: ajaxurl, data: data, type: 'GET', success: function (data) {
+				var json = JSON.parse(data);
+				$('.preloader').hide();
+				$('.preloader').after(json.pagination);
+				var title = json.heading_title;
+				history.pushState(state, title, url);
+
+				json.products.forEach(function(product) {
+					var inCart = product.inCart ? '<div class="goods__count"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="17" viewBox="0 0 21 17"><path fill="#fff" d="M20.93 3.68c.13-.36.03-.57-.07-.71-.25-.36-.78-.37-.89-.37H5.96L5.58.83c-.1-.42-.4-.82-1-.82H.64C.23 0 .01.2.01.58v1.03c0 .36.22.46.64.46h3.33l2.55 10.8a2.42 2.42 0 0 0-.63 1.64c0 1.28 1.02 2.46 2.33 2.46 1.23 0 2.15-1.16 2.3-1.84h4.96c.15.68.9 1.86 2.3 1.86 1.28 0 2.32-1.1 2.32-2.38 0-1.27-.77-2.4-2.31-2.4-.63 0-1.39.34-1.74.86h-6.1a1.92 1.92 0 0 0-1.65-.93l-.09-.45h9.27c.7 0 .84-.25.96-.59zM7.32 14.58c0-.49.4-.89.89-.89s.88.4.88.89-.39.88-.88.88a.89.89 0 0 1-.89-.88zm10.49.87a.87.87 0 1 1 0-1.74.87.87 0 0 1 0 1.74z"></path></svg><div>'+product.inCart+'</div>' : '';
+					var discount = product.discount ? '<div class="n-goods__discount">' +product.discount+ '%</div>' : '';
+					var oldPrice = product.oldPrice ? '<div class="n-goods__old">' + product.oldPrice +  ' руб.' + ' </div>' : '';
+					var html = '<div class="n-goods__item ' + (product.inCart ? 'n-goods__item--active' : '') + '">' +
+                              '<div class="n-goods__top">' +
+                              	inCart +
+                                '<a href="' + product.href + '" class="n-goods__img n-m-img-cont">' +
+                                  '<img src="' + product.thumb + '" alt="' +product.image_alt+ '" title="' +product.image_title+ '">'+
+                                '</a>' +
+                                discount + 
+                              '</div>' +
+                              '<div class="n-goods__content">' +
+                                '<div class="goods__collapse">' +
+                                  '<form action="#">' +
+                                    '<div class="count">' +
+                                        '<div class="count__btn">-</div>' +
+                                        '<input class="countProduct" type="text" value="1" min="1" max="100">' +
+                                        '<div class="count__btn">+</div>' +
+                                    '</div>' +
+                                    '<input class="product_id" type="hidden" value="' + product.product_id + '">' +
+                                    '<button class="btn btn--green addProduct" type="button"><img src="/catalog/view/theme/gretta/images/ico/cart.svg" alt=""></button>' +
+                                '</form>' +
+                              '</div>' +
+                                '<div class="n-goods__title">' +product.title+ '</div>' +
+                                '<div class="n-goods__bottom">' +
+																		'<div class="n-goods__price">' +
+																		'<span class="n-goods__price-span">Цена:</span>' +
+																		'<div class="n-goods__new">' + product.price+ ' руб.</div>' +
+                                    	oldPrice + 
+                                    '</div>' +
+                                    '<div class="n-goods__article">арт. ' + product.name + '</div>' +
+                                '</div>' +
+                              '</div>' +
+                          '</div>';
+					$('.goods__items').append(html);	
+				    $(".n-m-img-cont").each(function() {
+				        var it = $(this);
+				        var img = it.find("img").attr("src");
+				        it.css("background-image", "url(" + img + ")");
+				    });
+				});
+			}
+		});
+	}
+});

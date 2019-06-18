@@ -1,0 +1,69 @@
+$(document).ready(function() {
+    $("form.contact_form").each(function(index) {
+        var it = $(this);
+        it.validate({
+            rules: {
+                Имя: {
+                    required: false,
+                },
+                Телефон: {
+                    required: true,
+                },
+                Email_адрес: {
+                    email: true,
+                    required: true,
+                },
+                Сообщение: {
+                    required: true,
+                },
+            },
+            messages: {},
+            errorPlacement: function(error, element) {},
+            submitHandler: function(form) {
+                var data = new FormData(it[0]);
+                $.ajax({
+                    type: "POST",
+                    url: "../send.php",
+                    data: data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function (jqXHR, settings) {
+                        it.find('*[type="submit"]').find('.loading').addClass('visible');
+                    },
+                    success: function (response) {
+                        it.find('*[type="submit"]').find('.loading').removeClass('visible');
+                        $('.popup, .overlay').removeClass('visible');
+                        $('.status--success, .overlay').addClass('visible');
+                        $('.status--success .popup__title').text(it.find('*[type="submit"]').data('title'));
+                        it.find('input').val('');
+                        it.find('textarea').val('');
+                        setTimeout(function () {
+                            $('.status--success, .overlay').removeClass('visible');
+                        },3000);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        it.find('*[type="submit"]').find('.loading').removeClass('visible');
+                        $('.popup, .overlay').removeClass('visible');
+                        $('.status--error, .overlay').addClass('visible');
+                        it.find('input').val('');
+                        it.find('textarea').val('');
+                        setTimeout(function () {
+                            $('.status--error, .overlay').removeClass('visible');
+                        },3000);
+                    }
+                });
+                return false;
+            },
+            success: function() {
+				console.log(222);
+			},
+            highlight: function(element, errorClass) {
+                $(element).addClass('error');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('error');
+            }
+        });
+    });
+});

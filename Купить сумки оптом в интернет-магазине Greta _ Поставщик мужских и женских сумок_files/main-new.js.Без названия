@@ -1,0 +1,45 @@
+jQuery(document).ready(function($) {
+    $(document).on('click', '.sort-redlink-exp', function() {
+        $('.sort-menu-toggle, .sort-redlink-coll').addClass('visible');
+        $('.sort-redlink-exp').addClass("visible");
+    });
+    
+    $(document).on('click', '.sort-redlink-coll', function() {
+        $('.sort-redlink-exp').removeClass('visible');
+        $('.sort-menu-toggle, .sort-redlink-coll').removeClass("visible");
+    });
+    
+
+    if ($(window).width() <= 1920 && $(window).width() > 1030){
+        if($('.sort-link').length > 5){
+            addSortRedlink();
+            $('.sort-link:nth-child(n+6)').appendTo('.sort-menu-toggle');
+        };
+    } else if ($(window).width() <= 1030 && $(window).width() > 425){
+        if($('.sort-link').length > 2){
+            addSortRedlink();
+            $('.sort-link:nth-child(n+4)').appendTo('.sort-menu-toggle');
+        };
+    } else if ($(window).width() <= 425){
+        if($('.sort-link').length > 2){
+            addSortRedlink();
+            $('.sort-link:nth-child(n+3)').appendTo('.sort-menu-toggle');
+        };
+    } else {
+        if($(".sort-link").length > 7){
+            addSortRedlink();
+            $('.sort-link:nth-child(n+10)').appendTo('.sort-menu-toggle');
+        }
+    }
+
+    function addSortRedlink() {
+        $('.sort-container').append('<div class="redlink sort-redlink-exp sort-redlink">Развернуть все</div>'+
+            '<div class="redlink sort-redlink-coll sort-redlink">Свернуть все</div>'+
+            '<div class="sort-menu-toggle"></div>');
+    }
+    
+
+    
+    
+    
+});
