@@ -20,6 +20,13 @@ $(document).ready(function() {
 		var it = $(this);
 		var src = it.find("img").attr("src");
 		it.css("background-image", "url(" + src + ")");
-	});
+    });
     
+    $(".sidebar-container").stick_in_parent();
+
+    $(".content").each(function() {
+        var it = $(this);
+        it.closest(".b_center").find("aside--left").innerHeight();
+        it.css("min-height", it.closest(".b_center").find("aside--left").innerHeight());
+    });
 });
