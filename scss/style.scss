@@ -76,6 +76,31 @@
     }
 }
 
+.sidebar-container.fixed {
+    position: fixed;
+    bottom: 0;
+}
+.sidebar-container {
+    padding-bottom: 0;  
+    padding-bottom: 85px !important;
+    max-width: 315px;
+}
+.sidebar-container.fixed-bottom {
+    position: absolute;
+}
+@media screen and (max-width: 768px) {
+ .sticky-wrapper {
+     position: absolute !important;
+ }   
+}
+
+
+@media screen and (max-width: 1640px) {
+    .sidebar-container {
+        width: 260px !important;
+    }
+}
+
 .home__pagination {
     bottom: 27px !important;
     padding-left: 40px;

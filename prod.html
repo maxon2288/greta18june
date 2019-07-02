@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="http://sumkigreta.ru/catalog/view/theme/gretta/style/new-new-style.css" />
     <link rel="stylesheet" href="css/18june.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.js"> </script>
-
     <!-- Google Analytics -->
     <script defer>
         (function (i, s, o, g, r, a, m) {
@@ -134,11 +133,11 @@
             </div>
         </header>
         <main class="main main--asideleft cardproduct b_center">
-            <aside class="aside aside--left">
-                <aside id="column-left" class="col-sm-3 hidden-xs">
+            <aside class="aside aside--left sticky-wrapper">
+                <aside id="column-left" class="col-sm-3 hidden-xs sidebar-container">
                     <form action="#" id="search" class="aside__search form">
                         <input type="text" name="search" placeholder="Поиск..." value="">
-                        <button type="submit"><img src="http://sumkigreta.ru//catalog/view/theme/gretta/images/ico/magnifier.svg" alt=""></button>
+                        <button type="submit"><img src="http://sumkigreta.ru/catalog/view/theme/gretta/images/ico/magnifier.svg" alt=""></button>
                     </form>
                     <div class="left_menu">
                         <div class="left_menu__cat">
@@ -147,6 +146,10 @@
                             <div class="left_menu__subcat">
                                 <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozha" class="">Натуральная
                                     кожа</a>
+                                <div class="new-subcat__content">
+                                    <a href="#" class="new-subcat__item active">Весна-лето</a> <!--ACTIVE CLASS active-->
+                                    <a href="#" class="new-subcat__item">Зима-осень</a>
+                                </div>
                                 <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozhzam" class="">Искусственная
                                     кожа</a>
                                 <a href="http://sumkigreta.ru/zhenskiye-sumki/solomennyye-sumki" class="">Соломенные
@@ -160,10 +163,42 @@
                         <div class="left_menu__cat">
                             <a href="http://sumkigreta.ru/sale" class="left_menu__link ">
                                 Распродажа </a>
+                                <div class="left_menu__subcat">
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozha" class="">Натуральная
+                                    кожа</a>
+                                <div class="new-subcat__content">
+                                    <a href="#" class="new-subcat__item">Весна-лето</a>
+                                    <a href="#" class="new-subcat__item">Зима-осень</a>
+                                </div>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozhzam" class="">Искусственная
+                                    кожа</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/solomennyye-sumki" class="">Соломенные
+                                    сумки</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/tekstilnyye-sumki" class="">Текстильные
+                                    сумки</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zamshevyye-sumki" class="">Натуральная
+                                    замша</a>
+                            </div>
                         </div>
                         <div class="left_menu__cat">
                             <a href="http://sumkigreta.ru/detskie-sumki" class="left_menu__link ">
                                 Детские сумки, рюкзаки </a>
+                                <div class="left_menu__subcat">
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozha" class="">Натуральная
+                                    кожа</a>
+                                <div class="new-subcat__content">
+                                    <a href="#" class="new-subcat__item">Весна-лето</a>
+                                    <a href="#" class="new-subcat__item">Зима-осень</a>
+                                </div>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zhenskiye-sumki-kozhzam" class="">Искусственная
+                                    кожа</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/solomennyye-sumki" class="">Соломенные
+                                    сумки</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/tekstilnyye-sumki" class="">Текстильные
+                                    сумки</a>
+                                <a href="http://sumkigreta.ru/zhenskiye-sumki/zamshevyye-sumki" class="">Натуральная
+                                    замша</a>
+                            </div>
                         </div>
                         <div class="left_menu__cat">
                             <a href="http://sumkigreta.ru/ryukzaki" class="left_menu__link ">
@@ -3634,6 +3669,7 @@
     <!-- Google map -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyDVTQH6hEfqxBkzZUSZxWVwsNohv7bzdsg&callback=initMap"></script>
     <!-- Functionaly scripts -->
+    <script type="text/javascript" src="js/18.june.js"></script>
     <script type="text/javascript" src="http://sumkigreta.ru//catalog/view/theme/gretta/js/main.js"></script>
     <script type="text/javascript" src="http://sumkigreta.ru//catalog/view/theme/gretta/js/main-new.js"></script>
     <script type="text/javascript" src="http://sumkigreta.ru//catalog/view/theme/gretta/js/new-new-main.js"></script>
@@ -3660,8 +3696,11 @@
             if (!$('#column-left').length) {
                 $('.mobile_block').remove();
             }
+            
         });
     </script>
+    <script src="js/jquery.sticky.js"></script>
+
     <!-- END TURBOPARSER CODE -->
 </body>
 
