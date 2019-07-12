@@ -26,6 +26,7 @@ $(document).ready(function() {
             var scroll = $(document).scrollTop();
             console.log(sidebar);
             console.log(scroll);
+            $(".sticky-wrapper").css("min-height", sidebar);
             if (scroll >= sidebar + header - screenh + 85) {
                 $(".sidebar-container").addClass("fixed");
             } else {
